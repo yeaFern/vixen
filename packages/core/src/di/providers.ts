@@ -1,4 +1,4 @@
-import { Instantiable, Token } from "./types.js";
+import { Instantiable, Token } from "./types";
 
 export interface ClassProvider<T> {
   useClass: Instantiable<T>;

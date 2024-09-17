@@ -1,6 +1,6 @@
-import { ProviderRegistry } from "./provider-registry.js";
-import { Provider } from "./providers.js";
-import { Instantiable, Scope, Token } from "./types.js";
+import { ProviderRegistry } from "./provider-registry";
+import { Provider } from "./providers";
+import { Instantiable, Scope, Token } from "./types";
 
 /**
  * Implements an inversion-of-control container which can be used to instantiate

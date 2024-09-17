@@ -1,4 +1,4 @@
-import { Token, isConstructorToken } from "./types.js";
+import { Token, isConstructorToken } from "./types";
 
 export class DuplicateProviderTokenError extends Error {
   constructor(token: Token<any>) {
