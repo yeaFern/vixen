@@ -5,13 +5,14 @@
   ],
   "scripts": {
     "build": "npm run build -ws",
-    "test": "jest"
+    "test": "npm run test -ws"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^22.5.4",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "tsup": "^8.3.0",
     "typescript": "^5.6.2"
   }
