@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "tsup-node",
+    "lint": "biome format --write ./src && biome lint --write ./src",
     "test": "jest"
   },
   "keywords": [],

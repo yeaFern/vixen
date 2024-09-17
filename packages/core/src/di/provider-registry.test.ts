@@ -57,4 +57,38 @@ describe("ProviderRegistry", () => {
       });
     }).toThrow();
   });
+
+  it("returns the correct provider for a given token", () => {
+    const registry = new ProviderRegistry();
+
+    const token_a = Symbol("MY_TOKEN_A");
+    const token_b = Symbol("MY_TOKEN_B");
+
+    const token_a_value = "token_a_value";
+    const token_b_value = "token_b_value";
+
+    const token_a_provider = {
+      useValue: token_a_value,
+    };
+
+    const token_b_provider = {
+      useValue: token_b_value,
+    };
+
+    registry.assign(token_a, {
+      provider: token_a_provider,
+      scope: Scope.Singleton,
+    });
+
+    registry.assign(token_b, {
+      provider: token_b_provider,
+      scope: Scope.Singleton,
+    });
+
+    expect(registry.get(token_a)).toBeDefined();
+    expect(registry.get(token_a)?.provider).toBe(token_a_provider);
+
+    expect(registry.get(token_b)).toBeDefined();
+    expect(registry.get(token_b)?.provider).toBe(token_b_provider);
+  });
 });

@@ -1,31 +1,32 @@
-import { Token, isConstructorToken } from "./types";
+import { type Token, isConstructorToken } from "./types";
 
 export class DuplicateProviderTokenError extends Error {
-  constructor(token: Token<any>) {
+  constructor(token: Token) {
     super(
-      `A provider entry already exists for '${isConstructorToken(token) ? token.name : String(token)}'.`
+      `A provider entry already exists for '${isConstructorToken(token) ? token.name : String(token)}'.`,
     );
   }
 }
 
 export class UnknownTokenError extends Error {
-  constructor(token: Token<any>) {
+  constructor(token: Token) {
     super(
-      `Token '${isConstructorToken(token) ? token.name : String(token)}' has not been registered with the container.`
+      `Token '${isConstructorToken(token) ? token.name : String(token)}' has not been registered with the container.`,
     );
   }
 }
 
 export class InvalidProviderError extends Error {
   constructor() {
-    super(`The given provider was invalid.`);
+    super("The given provider was invalid.");
   }
 }
 
 export class ConstructorInjectionNotImplementedError extends Error {
+  // biome-ignore lint/complexity/noBannedTypes: We want Function here.
   constructor(token: Function) {
     super(
-      `Constructor injection is not implemented, please use property injection (for '${token.name}').`
+      `Constructor injection is not implemented, please use property injection (for '${token.name}').`,
     );
   }
 }

@@ -1,8 +1,8 @@
-import { Provider } from "./providers";
-import { Scope, Token } from "./types";
+import type { Provider } from "./providers";
+import type { Any, Scope, Token } from "./types";
 import { DuplicateProviderTokenError } from "./errors";
 
-export interface ProviderRegistryEntry<T = any> {
+export interface ProviderRegistryEntry<T = Any> {
   provider: Provider<T>;
   scope: Scope;
   instance?: T;
@@ -12,7 +12,7 @@ export interface ProviderRegistryEntry<T = any> {
  * A simple wrapper around a `Map` used for associating tokens with providers.
  */
 export class ProviderRegistry {
-  protected map = new Map<Token<any>, ProviderRegistryEntry>();
+  protected map = new Map<Token, ProviderRegistryEntry>();
 
   assign<T>(token: Token<T>, entry: ProviderRegistryEntry<T>): void {
     if (this.map.has(token)) {

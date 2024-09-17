@@ -5,9 +5,11 @@
   ],
   "scripts": {
     "build": "npm run build -ws",
-    "test": "npm run test -ws"
+    "test": "npm run test -ws",
+    "lint": "npm run lint -ws"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.1",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.5.4",
     "jest": "^29.7.0",
