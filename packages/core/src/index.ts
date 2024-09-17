@@ -1,1 +1,1 @@
-console.log("ok!");
+export * from "./di/container";

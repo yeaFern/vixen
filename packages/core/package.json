@@ -11,7 +11,7 @@
     "/dist"
   ],
   "scripts": {
-    "compile": "tsc -p tsconfig.pkg.json"
+    "build": "tsup-node"
   },
   "keywords": [],
   "devDependencies": {}
