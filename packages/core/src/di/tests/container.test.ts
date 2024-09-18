@@ -122,6 +122,31 @@ describe("Container", () => {
     expect(resolved.injected_property).toBe(expected_value);
   });
 
+  it("can resolve dependencies of a factory provider", () => {
+    const container = new Container();
+
+    const factory_token = Symbol("SOME_FACTORY");
+
+    const v1_token = Symbol("V1_TOKEN");
+    const v2_token = Symbol("V2_TOKEN");
+
+    const v1 = 123456;
+    const v2 = "Hello, world!";
+
+    const factory_function = jest.fn((v1: number, v2: string) => ({ v1, v2 }));
+
+    container.register(factory_token, {
+      inject: [v1_token, v2_token],
+      useFactory: factory_function,
+    });
+
+    container.register(v1_token, { useValue: v1 });
+    container.register(v2_token, { useValue: v2 });
+
+    expect(container.resolve(factory_token)).toStrictEqual({ v1, v2 });
+    expect(factory_function).toHaveBeenCalledWith(v1, v2);
+  });
+
   it("can detect circular dependencies", () => {
     // +---------+
     // |         |
