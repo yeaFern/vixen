@@ -1,6 +1,10 @@
+import {
+  DuplicateProviderTokenError,
+  DuplicateSingletonInstanceError,
+  UnknownTokenError,
+} from "./errors";
 import type { Provider } from "./providers";
 import type { Any, Scope, Token } from "./types";
-import { DuplicateProviderTokenError } from "./errors";
 
 export interface ProviderRegistryEntry<T = Any> {
   provider: Provider<T>;
@@ -14,7 +18,10 @@ export interface ProviderRegistryEntry<T = Any> {
 export class ProviderRegistry {
   protected map = new Map<Token, ProviderRegistryEntry>();
 
-  assign<T>(token: Token<T>, entry: ProviderRegistryEntry<T>): void {
+  assign<T>(
+    token: Token<T>,
+    entry: Omit<ProviderRegistryEntry<T>, "instance">
+  ): void {
     if (this.map.has(token)) {
       throw new DuplicateProviderTokenError(token);
     }
@@ -22,8 +29,14 @@ export class ProviderRegistry {
     this.map.set(token, entry);
   }
 
-  get<T>(token: Token<T>): ProviderRegistryEntry<T> | undefined {
-    return this.map.get(token);
+  get<T>(token: Token<T>): ProviderRegistryEntry<T> {
+    const result = this.map.get(token);
+
+    if (result === undefined) {
+      throw new UnknownTokenError(token);
+    }
+
+    return result;
   }
 
   clear(): void {

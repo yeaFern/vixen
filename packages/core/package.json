@@ -16,5 +16,8 @@
     "test": "jest"
   },
   "keywords": [],
+  "dependencies": {
+    "reflect-metadata": "^0.2.2"
+  },
   "devDependencies": {}
 }

@@ -1,5 +1,6 @@
-import { ProviderRegistry } from "./provider-registry";
-import { Scope } from "./types";
+import { DuplicateProviderTokenError, UnknownTokenError } from "../errors";
+import { ProviderRegistry } from "./../provider-registry";
+import { Scope } from "./../types";
 
 describe("ProviderRegistry", () => {
   it("can assign a token to an entry", () => {
@@ -33,7 +34,7 @@ describe("ProviderRegistry", () => {
     registry.clear();
 
     expect(registry.has(token)).toBe(false);
-    expect(registry.get(token)).toBeUndefined();
+    expect(() => registry.get(token)).toThrow(UnknownTokenError);
   });
 
   it("cannot assign multiple providers to a single token", () => {
@@ -55,7 +56,7 @@ describe("ProviderRegistry", () => {
         },
         scope: Scope.Singleton,
       });
-    }).toThrow();
+    }).toThrow(DuplicateProviderTokenError);
   });
 
   it("returns the correct provider for a given token", () => {
